@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg portal-navbar">
+        <div class="container-fluid">
+            <span class="navbar-brand me-4">Student Dashboard</span>
+            <div class="collapse navbar-collapse show">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="signup.html">Signup</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Login</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button type="button" class="btn btn-outline-danger btn-sm action-logout">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="dashboard-container">
+            <div id="studentWelcomeBanner" class="student-welcome-banner">
+                Welcome, Student
+            </div>
+
+            <div id="dashboardAlert" style="display: none;"></div>
+
+            <div class="d-flex justify-content-end mb-2">
+                <button type="button" class="btn btn-primary btn-sm px-3" data-bs-toggle="modal" data-bs-target="#editProfileModal">
+                    Edit Profile
+                </button>
+            </div>
+
+            <div class="profile-card">
+                <div class="profile-field-row">
+                    <div class="profile-field-label">Email:</div>
+                    <div class="profile-field-value">
+                        <span id="dispEmail">-</span>
+                        <svg class="lock-icon" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 1a2 2 0 0 0-2 2v4H5a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2zm1 6V3a1 1 0 0 0-2 0v4h2z"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="profile-field-row">
+                    <div class="profile-field-label">Date of Birth:</div>
+                    <div class="profile-field-value" id="dispDob">-</div>
+                </div>
+
+                <div class="profile-field-row">
+                    <div class="profile-field-label">Gender:</div>
+                    <div class="profile-field-value" id="dispGender">-</div>
+                </div>
+
+                <div class="profile-field-row">
+                    <div class="profile-field-label">Qualification:</div>
+                    <div class="profile-field-value" id="dispQualification">-</div>
+                </div>
+
+                <div class="profile-field-row">
+                    <div class="profile-field-label">Interests:</div>
+                    <div class="profile-field-value">
+                        <div class="form-check form-check-inline me-3 mb-0">
+                            <input class="form-check-input" type="checkbox" id="dispInterest_Coding" disabled>
+                            <label class="form-check-label text-dark">Coding</label>
+                        </div>
+                        <div class="form-check form-check-inline me-3 mb-0">
+                            <input class="form-check-input" type="checkbox" id="dispInterest_Design" disabled>
+                            <label class="form-check-label text-dark">Design</label>
+                        </div>
+                        <div class="form-check form-check-inline me-3 mb-0">
+                            <input class="form-check-input" type="checkbox" id="dispInterest_Gaming" disabled>
+                            <label class="form-check-label text-dark">Gaming</label>
+                        </div>
+                        <div class="form-check form-check-inline me-3 mb-0">
+                            <input class="form-check-input" type="checkbox" id="dispInterest_Sports" disabled>
+                            <label class="form-check-label text-dark">Sports</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-field-row">
+                    <div class="profile-field-label">Class:</div>
+                    <div class="profile-field-value" id="dispClass">-</div>
+                </div>
+
+                <div class="profile-field-row">
+                    <div class="profile-field-label">Subject:</div>
+                    <div class="profile-field-value" id="dispSubject">-</div>
+                </div>
+
+                <div class="profile-field-row">
+                    <div class="profile-field-label">Marks:</div>
+                    <div class="profile-field-value" id="dispMarks">-</div>
+                </div>
+
+                <div class="profile-field-row">
+                    <div class="profile-field-label">Aadhaar Document:</div>
+                    <div class="profile-field-value">
+                        <a id="dispAadhaarLink" href="../uploads/sample_aadhaar.pdf" target="_blank" class="pdf-icon-badge">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+                                <path d="M4.603 14.087a.81.81 0 0 1-.438-.42c-.195-.388-.13-.776.08-1.127.288-.48 1.056-.874 2.296-1.177.34-.083.7-.156 1.077-.217.382-.062.775-.107 1.173-.135.28-.482.52-1.01.716-1.576.224-.648.374-1.32.448-2.002.043-.393.13-.787.262-1.168.138-.4.364-.728.675-.98.318-.258.694-.388 1.125-.388.423 0 .783.125 1.077.373.3.253.473.59.518 1.01.045.422-.058.855-.308 1.298-.24.425-.595.77-1.063 1.033a8.91 8.91 0 0 1-1.28.59c-.062.24-.132.483-.21.728-.152.478-.344.957-.573 1.433.398.24.83.447 1.294.62.472.176.96.307 1.464.394.462.08.835.253 1.118.518.286.268.428.618.428 1.05 0 .438-.156.812-.468 1.12-.31.306-.71.46-1.2.46-.57 0-1.155-.213-1.753-.64-.59-.42-1.17-1.014-1.74-1.782-.44.03-.89.076-1.35.137-.46.06-.92.14-1.38.24-.8.88-1.55 1.48-2.25 1.8-.7.32-1.37.38-2.01.18z"/>
+                            </svg>
+                            <span>View Aadhaar PDF</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form id="studentEditForm">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label text-secondary small fw-bold">Full Name</label>
+                                <input type="text" id="editProfileName" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label text-secondary small fw-bold">Email Address</label>
+                                <div class="input-group">
+                                    <input type="email" id="editProfileEmail" class="form-control bg-light" readonly disabled>
+                                    <span class="input-group-text bg-light text-muted">
+                                        <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                                            <path d="M8 1a2 2 0 0 0-2 2v4H5a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2zm1 6V3a1 1 0 0 0-2 0v4h2z"/>
+                                        </svg>
+                                    </span>
+                                </div>
+                                <div class="form-text text-muted">Email is locked and cannot be changed.</div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label text-secondary small fw-bold">Date of Birth</label>
+                                <input type="date" id="editProfileDob" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label text-secondary small fw-bold d-block">Gender</label>
+                                <div class="pt-2">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input edit-gender" type="radio" name="gender" id="simGenderMale" value="Male">
+                                        <label class="form-check-label" for="simGenderMale">Male</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input edit-gender" type="radio" name="gender" id="simGenderFemale" value="Female">
+                                        <label class="form-check-label" for="simGenderFemale">Female</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input edit-gender" type="radio" name="gender" id="simGenderOther" value="Other">
+                                        <label class="form-check-label" for="simGenderOther">Other</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label text-secondary small fw-bold">Qualification</label>
+                                <select id="editProfileQualification" class="form-select">
+                                    <option value="High School">High School</option>
+                                    <option value="Bachelor's">Bachelor's</option>
+                                    <option value="Master's">Master's</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label text-secondary small fw-bold d-block">Interests</label>
+                                <div class="pt-2">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input edit-interest" type="checkbox" name="interests[]" id="simIntCoding" value="Coding">
+                                        <label class="form-check-label" for="simIntCoding">Coding</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input edit-interest" type="checkbox" name="interests[]" id="simIntDesign" value="Design">
+                                        <label class="form-check-label" for="simIntDesign">Design</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input edit-interest" type="checkbox" name="interests[]" id="simIntGaming" value="Gaming">
+                                        <label class="form-check-label" for="simIntGaming">Gaming</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input edit-interest" type="checkbox" name="interests[]" id="simIntSports" value="Sports">
+                                        <label class="form-check-label" for="simIntSports">Sports</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label text-secondary small fw-bold">Class</label>
+                                <input type="text" id="editProfileClass" class="form-control">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label text-secondary small fw-bold">Subject</label>
+                                <input type="text" id="editProfileSubject" class="form-control">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label text-secondary small fw-bold">Marks</label>
+                                <input type="number" id="editProfileMarks" class="form-control">
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label text-secondary small fw-bold">Replace Aadhaar Document (PDF only)</label>
+                                <input type="file" id="editProfileAadhaar" class="form-control" accept=".pdf,application/pdf">
+                                <div class="form-text text-muted">Leave empty if you do not wish to replace the current document.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer class="portal-footer">
+        Basic Coding Test - 1 | Student Dashboard | Task Document
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/simulation.js"></script>
+</body>
+</html>

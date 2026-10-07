@@ -1,0 +1,151 @@
+body {
+    background-color: #f4f7fa;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.portal-navbar {
+    background-color: #dceaf7;
+    border-bottom: 1px solid #c8d9e8;
+    padding: 0.6rem 1.5rem;
+}
+
+.portal-navbar .navbar-brand {
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+.portal-navbar .nav-link {
+    color: #495057;
+    font-size: 0.95rem;
+    padding: 0.3rem 0.8rem;
+}
+
+.portal-navbar .nav-link:hover {
+    color: #0d6efd;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5rem 1rem;
+}
+
+.auth-card {
+    background: #ffffff;
+    border: 1px solid #d9e2ec;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 480px;
+    padding: 2.2rem;
+}
+
+.signup-card {
+    background: #ffffff;
+    border: 1px solid #d9e2ec;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 900px;
+    padding: 2.2rem;
+}
+
+.dashboard-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.admin-container {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.card-title-custom {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #1f2937;
+    margin-bottom: 1.5rem;
+}
+
+.student-welcome-banner {
+    background-color: #0d6efd;
+    color: #ffffff;
+    text-align: center;
+    padding: 0.75rem 1rem;
+    font-size: 1.15rem;
+    font-weight: 500;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+}
+
+.profile-card {
+    background: #ffffff;
+    border: 1px solid #d9e2ec;
+    border-radius: 4px;
+    padding: 2rem;
+}
+
+.profile-field-row {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    font-size: 0.95rem;
+}
+
+.profile-field-label {
+    font-weight: 600;
+    color: #334155;
+    min-width: 150px;
+}
+
+.profile-field-value {
+    color: #1e293b;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.lock-icon {
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.pdf-icon-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: #dc3545;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.pdf-icon-badge:hover {
+    color: #b02a37;
+    text-decoration: underline;
+}
+
+.portal-footer {
+    text-align: center;
+    padding: 1.5rem 1rem;
+    color: #6c757d;
+    font-size: 0.85rem;
+    border-top: 1px solid #e2e8f0;
+    background-color: #ffffff;
+}
+
+.table-filter-bar {
+    background: #ffffff;
+    border: 1px solid #d9e2ec;
+    border-radius: 4px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.25rem;
+}

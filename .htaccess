@@ -1,0 +1,6 @@
+RewriteEngine On
+RewriteRule ^admin/dashboard/?$ views/admin_dashboard.php [L,QSA]
+RewriteRule ^student/dashboard/?$ views/student_dashboard.php [L,QSA]
+RewriteRule ^login/?$ views/login.php [L,QSA]
+RewriteRule ^signup/?$ views/signup.php [L,QSA]
+RewriteRule ^forgot-password/?$ views/forgot_password.php [L,QSA]

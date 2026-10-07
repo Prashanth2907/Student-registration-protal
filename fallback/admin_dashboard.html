@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg portal-navbar">
+        <div class="container-fluid">
+            <span class="navbar-brand me-4">Admin Dashboard</span>
+            <div class="collapse navbar-collapse show">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Home</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center gap-3">
+                    <span class="text-secondary small fw-semibold">Logged in as Administrator</span>
+                    <button type="button" class="btn btn-outline-danger btn-sm action-logout">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-content d-block">
+        <div class="admin-container py-3">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4 class="m-0 text-dark">Registered Students</h4>
+                <span id="studentTotalBadge" class="badge bg-primary fs-6">0 Students</span>
+            </div>
+
+            <div id="adminAlert" style="display: none;"></div>
+
+            <div class="table-filter-bar shadow-sm">
+                <div class="row g-2 align-items-center">
+                    <div class="col-md-3">
+                        <label class="form-label text-secondary small fw-bold mb-1">Search by Name</label>
+                        <input type="text" id="filterName" class="form-control form-control-sm" placeholder="Enter student name...">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label text-secondary small fw-bold mb-1">Search by Class</label>
+                        <input type="text" id="filterClass" class="form-control form-control-sm" placeholder="Enter class name...">
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label text-secondary small fw-bold mb-1">Min Age</label>
+                        <input type="number" id="filterMinAge" class="form-control form-control-sm" placeholder="e.g. 18" min="0">
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label text-secondary small fw-bold mb-1">Max Age</label>
+                        <input type="number" id="filterMaxAge" class="form-control form-control-sm" placeholder="e.g. 30" min="0">
+                    </div>
+                    <div class="col-md-2 d-flex align-items-end">
+                        <button type="button" id="resetFiltersBtn" class="btn btn-outline-secondary btn-sm w-100">
+                            Reset Filters
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow-sm border-0">
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered mb-0 align-middle" id="studentTable">
+                        <thead class="table-light">
+                            <tr>
+                                <th style="width: 90px;">User ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>DOB</th>
+                                <th>Age</th>
+                                <th>Gender</th>
+                                <th>Qualification</th>
+                                <th>Interests</th>
+                                <th>Class</th>
+                                <th>Subject</th>
+                                <th>Marks</th>
+                                <th>Document</th>
+                                <th style="width: 140px;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editStudentModal" tabindex="-1" aria-labelledby="editStudentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form id="adminEditStudentForm">
+                    <input type="hidden" id="adminEditStudentId">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editStudentModalLabel">Edit Student Details</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label text-secondary small fw-bold">Full Name (Locked)</label>
+                                <input type="text" id="adminEditStudentName" class="form-control bg-light" readonly disabled>
+                                <div class="form-text text-muted">Student name cannot be modified by admin.</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label text-secondary small fw-bold">Email Address (Locked)</label>
+                                <input type="email" id="adminEditStudentEmail" class="form-control bg-light" readonly disabled>
+                                <div class="form-text text-muted">Student email cannot be modified by admin.</div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label text-secondary small fw-bold">Date of Birth</label>
+                                <input type="date" id="adminEditStudentDob" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label text-secondary small fw-bold d-block">Gender</label>
+                                <div class="pt-2">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input edit-gender" type="radio" name="gender" id="admRadioMale" value="Male">
+                                        <label class="form-check-label" for="admRadioMale">Male</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input edit-gender" type="radio" name="gender" id="admRadioFemale" value="Female">
+                                        <label class="form-check-label" for="admRadioFemale">Female</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input edit-gender" type="radio" name="gender" id="admRadioOther" value="Other">
+                                        <label class="form-check-label" for="admRadioOther">Other</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label text-secondary small fw-bold">Qualification</label>
+                                <select id="adminEditStudentQualification" class="form-select">
+                                    <option value="High School">High School</option>
+                                    <option value="Bachelor's">Bachelor's</option>
+                                    <option value="Master's">Master's</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label text-secondary small fw-bold d-block">Interests</label>
+                                <div class="pt-2">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input edit-interest" type="checkbox" name="interests[]" id="admIntCoding" value="Coding">
+                                        <label class="form-check-label" for="admIntCoding">Coding</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input edit-interest" type="checkbox" name="interests[]" id="admIntDesign" value="Design">
+                                        <label class="form-check-label" for="admIntDesign">Design</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input edit-interest" type="checkbox" name="interests[]" id="admIntGaming" value="Gaming">
+                                        <label class="form-check-label" for="admIntGaming">Gaming</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input edit-interest" type="checkbox" name="interests[]" id="admIntSports" value="Sports">
+                                        <label class="form-check-label" for="admIntSports">Sports</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label text-secondary small fw-bold">Class</label>
+                                <input type="text" id="adminEditStudentClass" class="form-control">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label text-secondary small fw-bold">Subject</label>
+                                <input type="text" id="adminEditStudentSubject" class="form-control">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label text-secondary small fw-bold">Marks</label>
+                                <input type="number" id="adminEditStudentMarks" class="form-control">
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label text-secondary small fw-bold">Replace Aadhaar File (Optional)</label>
+                                <input type="file" id="adminEditStudentAadhaar" class="form-control" accept=".pdf,application/pdf">
+                                <div class="form-text text-muted">Upload a new PDF to replace the existing Aadhaar document.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Update Student</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer class="portal-footer">
+        Basic Coding Test - 1 | Admin Dashboard | Task Document
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/simulation.js"></script>
+</body>
+</html>
